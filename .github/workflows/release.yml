@@ -1,0 +1,99 @@
+name: Release
+on:
+  repository_dispatch:
+    types: [desktop_app_release]
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-20.04, windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Clone Gitlab repo
+        run: git clone https://${{ secrets.GITLAB_USER }}:${{ secrets.GITLAB_TOKEN }}@gitlab.com/agent-x/agx-webapp.git
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Rust setup
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./agx-webapp/src-tauri -> target"
+
+      - name: Sync node version and setup cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: agx-webapp
+
+      - name: Install additional frontend dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: npm i -D @tauri-apps/cli-linux-x64-gnu
+        working-directory: agx-webapp
+
+      - name: Install additional frontend dependencies (mac only)
+        if: matrix.platform == 'macos-latest'
+        run: npm i -D @tauri-apps/cli-darwin-x64
+        working-directory: agx-webapp
+
+      - name: Build and release the app
+        uses: tauri-apps/tauri-action@dev
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY}}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD}}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_HEALTH_URL: ${{ secrets.VITE_HEALTH_URL }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+          VITE_PUSHER_KEY: ${{ secrets.VITE_PUSHER_KEY }}
+          VITE_PUSHER_HOST: ${{ secrets.VITE_PUSHER_HOST }}
+          VITE_KEYCLOAK_CLIENT_ID: ${{ secrets.VITE_KEYCLOAK_CLIENT_ID }}
+          VITE_KEYCLOAK_REALM: ${{ secrets.VITE_KEYCLOAK_REALM }}
+          VITE_KEYCLOAK_SERVER_URL: ${{ secrets.VITE_KEYCLOAK_SERVER_URL }}
+        with:
+          projectPath: agx-webapp
+          tagName: v__VERSION__
+          releaseName: "Agent X v__VERSION__"
+          includeUpdaterJson: true
+
+  publish-updater:
+    permissions:
+      contents: write
+    runs-on: ubuntu-20.04
+    needs: [release]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download relase asset
+        uses: robinraju/release-downloader@v1.7
+        with:
+          latest: true
+          fileName: "latest.json"
+
+      - name: publish updater
+        run: |
+            git config --global user.name 'GitHub Action'
+            git config --global user.email 'github_action@users.noreply.github.com'
+            git add latest.json
+            git commit -am "Latest Release Updater"
+            git push
+           
