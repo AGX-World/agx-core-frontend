@@ -1,0 +1,19 @@
+{
+  "version": "0.24.2",
+  "notes": "",
+  "pub_date": "2023-06-07T14:00:07.231Z",
+  "platforms": {
+    "linux-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb2MzZlV1b1VxRU5LWC9yWGVucDV2RGgzb2dDTDIrTmEvdDc2Q3cwQnAxOGJXby9uMXV5R1FVcGFYMGVlVkFPMmJFMlBTOHBlbzFmTy8xM2FhSW1DNWhCMWM3RDFTNXcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg2MTQ2MTgyCWZpbGU6YWdlbnQteF8wLjI0LjJfYW1kNjQuQXBwSW1hZ2UudGFyLmd6CjhlMzZsUkIxU3gvZmtDZ2owYUhpOUpYc2l6ZjJiYk8yRnpOTHVUZGVNandLZjZiVTVZUDdXeHRCZkFnRlRGNnl6U0xad3JMZ1AzaE81cDJFdWJPUENBPT0K",
+      "url": "https://github.com/AGX-World/agx-core-frontend/releases/download/v0.24.2/agent-x_0.24.2_amd64.AppImage.tar.gz"
+    },
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb2MzZlV1b1VxRU5GZGVXK3YxVVhzd29Gd0gyNmFiWVNGZ3BlTWMxZHZIVGlWYks3TFdldjZBVHNCYkJ4V1QrWVFXbHQ4RDdPVDB2Tkoyd3ZsbndsY253SDNxc05WUXdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg2MTQ2Mjc0CWZpbGU6QWdlbnQgWC5hcHAudGFyLmd6CmRURXh2emU1b2pJSitQSnBZcmwvR3lLWXVzZVBEdUc4VlFsSjBBajJINTdxSyt3R09lV3VxY21TeDR1T2VTR1NjWnl2N1NraGJBNW1QL0Q0Z082WkR3PT0K",
+      "url": "https://github.com/AGX-World/agx-core-frontend/releases/download/v0.24.2/Agent.X_x64.app.tar.gz"
+    },
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb2MzZlV1b1VxRUVEeVlBMnZEVU0yLzZnZUVva0o0bTkza1BaVzVuRlNKdTdQZ2FLZ0M4eHZxSHBvem1MMkFJMTU3WEUzQUQ1UWVWbDljK25LR0Z4NDl3U2lnT0g0eFFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg2MTQ2NDAzCWZpbGU6QWdlbnQgWF8wLjI0LjJfeDY0X2VuLVVTLm1zaS56aXAKR1AyODBRYm5RczdXc0FRalBLdjV2cVhSNjN1eExhNmNDQjVLcHVEWlBqemN1OE1HcDU1a2FyWWsvUHBSZktSdnVKOWlPSDZSdkxtRUdUdkdKcDVuQkE9PQo=",
+      "url": "https://github.com/AGX-World/agx-core-frontend/releases/download/v0.24.2/Agent.X_0.24.2_x64_en-US.msi.zip"
+    }
+  }
+}
